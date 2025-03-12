@@ -1,0 +1,25 @@
+<div class="dashboard-container">
+    <h1>Showing results for: {{ covidDataService.selectedCountry ? covidDataService.selectedCountry.country : 'Country not selected' }}</h1>
+
+    <div class="dashboard-controls">
+      <mat-form-field appearance="outline">
+        <mat-label>Select Country</mat-label>
+        <mat-select [value]="covidDataService.selectedCountry" (selectionChange)="setCountry($event.value)">
+            <mat-option *ngFor="let country of (covidDataService.countries | async)" [value]="country">
+                {{ country.country }}
+            </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Select Time Period</mat-label>
+        <mat-select [value]="covidDataService.selectedTimeFrame" (selectionChange)="setSelectedTimeFrame($event.value)">
+          <mat-option *ngFor="let period of timePeriods" [value]="period.value">
+            {{ period.label }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <app-chart />
+</div>
